@@ -1,26 +1,43 @@
 ---
 import HeaderLink from './HeaderLink.astro';
 import { SITE_TITLE } from '../consts';
+
+const isEnglish = Astro.url.pathname.startsWith('/en');
+const navItems = isEnglish
+	? [
+			{ href: '/en/', label: 'Home' },
+			{ href: '/en/blog', label: 'Projects' },
+			{ href: '/en/about', label: 'About' },
+	  ]
+	: [
+			{ href: '/', label: 'Anasayfa' },
+			{ href: '/blog', label: 'Projeler' },
+			{ href: '/about', label: 'Hakkımda' },
+	  ];
 ---
 
 <header>
 	<nav>
-		<h2><a href="/">{SITE_TITLE}</a></h2>
+		<h2><a href={isEnglish ? '/en/' : '/'}>{SITE_TITLE}</a></h2>
 		<div class="internal-links">
-			<HeaderLink href="/">Home</HeaderLink>
-			<HeaderLink href="/blog">Projeler</HeaderLink>
-			<HeaderLink href="/about">Hakkımda</HeaderLink>
+			{navItems.map(item => <HeaderLink href={item.href}>{item.label}</HeaderLink>)}
 		</div>
-		<div class="social-links">
-			<a href="https://github.com/yusufturhan07" target="_blank">
-				<span class="sr-only">GitHub profilim</span>
-				<svg viewBox="0 0 16 16" aria-hidden="true" width="32" height="32"
-					><path
-						fill="currentColor"
-						d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"
-					></path></svg
-				>
-			</a>
+		<div class="header-right">
+			<div class="lang-switcher">
+				{isEnglish ? (
+					<span>
+						<a class="lang-btn" href="/">TR</a>
+						<span class="lang-sep">|</span>
+						<span class="lang-btn active">EN</span>
+					</span>
+				) : (
+					<span>
+						<span class="lang-btn active">TR</span>
+						<span class="lang-sep">|</span>
+						<a class="lang-btn" href="/en/">EN</a>
+					</span>
+				)}
+			</div>
 		</div>
 	</nav>
 </header>
@@ -64,25 +81,67 @@ import { SITE_TITLE } from '../consts';
 		align-items: center;
 		gap: 0.5em;
 	}
+	.header-right {
+		display: flex;
+		align-items: center;
+	}
+	.lang-switcher {
+		display: flex;
+		align-items: center;
+		font-size: 1em;
+		gap: 0.5em;
+		margin-left: 1.5em;
+	}
+	.lang-btn {
+		display: inline-block;
+		padding: 0.25em 0.9em;
+		border: none;
+		background: transparent;
+		color: var(--black);
+		font-weight: 500;
+		text-decoration: none;
+		transition: opacity 0.2s;
+		cursor: pointer;
+	}
+	.lang-btn:hover {
+		opacity: 0.7;
+	}
+	.lang-btn.active {
+		color: var(--black);
+		font-weight: 700;
+		cursor: default;
+		pointer-events: none;
+	}
+	.lang-sep {
+		margin: 0 0.2em;
+		color: var(--black);
+		font-weight: 400;
+	}
 	@media (max-width: 720px) {
-		.social-links {
-			display: none;
-		}
 		nav {
-			flex-direction: column;
-			padding: 0.5em 0;
-		}
-		.internal-links {
 			flex-wrap: wrap;
+			gap: 0.5em;
+			padding: 0.25em 0;
+		}
+		
+		.internal-links {
+			order: 2;
+			width: 100%;
 			justify-content: center;
-			gap: 0.25em;
+			margin-top: 0em;
 		}
+		
+		.header-right {
+			order: 1;
+			margin-left: auto;
+		}
+		
+		.lang-switcher {
+			margin-left: 0;
+		}
+
 		nav a {
-			padding: 0.5em;
-			font-size: 0.9em;
-		}
-		h2 {
-			margin-bottom: 0.5em;
+			padding: 0.25em 0.25em;
 		}
 	}
 </style>

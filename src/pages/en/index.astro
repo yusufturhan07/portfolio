@@ -1,0 +1,39 @@
+---
+import BaseHead from '../../components/BaseHead.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../../consts';
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+	</head>
+	<body>
+		<Header />
+		<main>
+			<h1>Welcome</h1>
+			<p>
+				Hi, I'm Yusuf Turhan. I am a software developer building cross-platform mobile applications for iOS and Android. I have experience with Dart, Flutter, Firebase, and RESTful API integration. I focus on delivering clean, scalable, and user-friendly interfaces. I have published mobile apps that reach real users.
+			</p>
+			<p>
+				I am one of the developers and co-founders of <strong>Paty</strong>, a mobile app for pet adoption and lost pet reporting. Paty is available on the App Store and Play Store, and continues to grow and evolve.
+			</p>
+			<p>
+				Previously, I developed the mobile version of Odabaşı Group's CRM system using Flutter, and completed internships at Dogus Hospitality & Retail Group and Halkbank.
+			</p>
+			<p>Core Skills:</p>
+			<ul>
+				<li>Flutter, Vue.js, JavaScript, Python, Java</li>
+				<li>Firestore, PostgreSQL, REST API, Firebase Cloud Messaging</li>
+				<li>Responsive and user-focused interfaces</li>
+				<li>Teamwork, problem solving, project management</li>
+			</ul>
+			<p>
+				For more information or to get in touch, please visit the <a href="/en/about">About</a> page.
+			</p>
+		</main>
+		<Footer />
+	</body>
+</html> 
