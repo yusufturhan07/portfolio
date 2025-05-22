@@ -77,9 +77,30 @@ import { SITE_TITLE } from '../consts';
 	.social-links a {
 		display: flex;
 	}
+	.internal-links {
+		display: flex;
+		align-items: center;
+		gap: 0.5em;
+	}
 	@media (max-width: 720px) {
 		.social-links {
 			display: none;
+		}
+		nav {
+			flex-direction: column;
+			padding: 0.5em 0;
+		}
+		.internal-links {
+			flex-wrap: wrap;
+			justify-content: center;
+			gap: 0.25em;
+		}
+		nav a {
+			padding: 0.5em;
+			font-size: 0.9em;
+		}
+		h2 {
+			margin-bottom: 0.5em;
 		}
 	}
 </style>
